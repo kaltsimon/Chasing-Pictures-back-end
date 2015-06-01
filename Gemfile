@@ -9,6 +9,10 @@ gem 'devise_token_auth'
 
 gem 'pg'
 
-gem 'spring', :group => :development
+group :development, :test do
+  gem 'sqlite3'
+end
+
+gem 'spring', group: :development
 
 gem 'rails_12factor', group: :production

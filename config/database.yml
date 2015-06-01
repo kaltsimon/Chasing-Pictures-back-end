@@ -5,19 +5,16 @@
 #   gem 'sqlite3'
 #
 development:
-  adapter: postgresql
-  database: chasing_pictures_development
-  host: localhost
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
-  username: chasing_pictures
-  password: yay
+  timeout: 5000
 
 test:
-  adapter: postgresql
-  database: chasing_pictures_test
+  adapter: sqlite3
+  database: db/test.sqlite3
   pool: 5
-  username: chasing_pictures
-  password: yay
+  timeout: 5000
 
 default: &default
   adapter: postgresql
