@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  before_action :authenticate_user!
+
   RANGE = 50 # Anything farther than 50km probably does not make any sense
 
   def find
