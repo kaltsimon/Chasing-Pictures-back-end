@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607135322) do
+ActiveRecord::Schema.define(version: 20150607142922) do
 
   create_table "pictures", force: :cascade do |t|
     t.datetime "time"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20150607135322) do
 
   create_table "places", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "latitude",    precision: 15, scale: 10, default: 0.0
-    t.decimal  "longitude",   precision: 15, scale: 10, default: 0.0
     t.text     "description"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "users", force: :cascade do |t|

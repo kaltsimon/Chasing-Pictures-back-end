@@ -7,6 +7,8 @@ gem 'rails-api'
 gem 'omniauth'
 gem 'devise_token_auth'
 
+gem 'geocoder'
+
 gem 'pg'
 
 group :development, :test do
