@@ -4,10 +4,22 @@ class PlacesController < ApplicationController
   RANGE = 50 # Anything farther than 50km probably does not make any sense
 
   def find
-    render json: closest(params[:latitude], params[:longitude]).take(3)
+    render json: format_places(closest(params[:latitude], params[:longitude]).take(3))
   end
 
   private
+
+  def format_places(places)
+    places.map do |place|
+      {
+        name: place.name,
+        latitude: place.latitude,
+        longitude: place.longitude,
+        description: place.description,
+        picture: place.pictures.first
+      }
+    end
+  end
 
   def closest(lat, lon)
     Place.near(
