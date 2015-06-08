@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'digest/md5'
+require 'yaml'
 
 # seems to work http://stackoverflow.com/questions/1026337/how-do-i-get-link-to-an-image-on-wikipedia-from-the-infobox
 def commons_page_to_image_url(file_url)
@@ -11,17 +12,19 @@ def commons_page_to_image_url(file_url)
 end
 
 doc = Nokogiri::XML(open('https://offenedaten.de/storage/f/2014-04-06T10%3A06%3A29.535Z/stadtmuseumberlin-stadtansichten.xml')).remove_namespaces!
+places, pictures = [], []
+
 doc.css('museumdat').each do |item|
-  place = Place::where({
+  places << {
     name: item.xpath('.//title[@pref="preferred"]').text,
     description: item.xpath('.//title[@pref="alternate"]').text,
     longitude: 0.0,
-    latitude: 0.0
-  }).first_or_create
-
-  Picture::where({
-    url: commons_page_to_image_url(item.xpath('.//resourceID').text),
-    time: Date.new((item.xpath('.//earliestDate').empty? ? item.xpath('.//displayCreationDate').text : item.xpath('.//earliestDate').text).to_i),
-    place: place
-  }).first_or_create
+    latitude: 0.0,
+    picture: {
+      url: commons_page_to_image_url(item.xpath('.//resourceID').text),
+      time: Date.new((item.xpath('.//earliestDate').empty? ? item.xpath('.//displayCreationDate').text : item.xpath('.//earliestDate').text).to_i),
+    }
+  }
 end
+
+puts places.to_yaml
