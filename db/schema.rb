@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531193440) do
+ActiveRecord::Schema.define(version: 20150607142922) do
+
+  create_table "pictures", force: :cascade do |t|
+    t.datetime "time"
+    t.string   "url"
+    t.integer  "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pictures", ["place_id"], name: "index_pictures_on_place_id"
+
+  create_table "places", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",                            null: false
