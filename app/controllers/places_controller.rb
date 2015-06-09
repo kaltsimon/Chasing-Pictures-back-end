@@ -10,7 +10,8 @@ class PlacesController < ApplicationController
   private
 
   def format_places(places)
-    places.map do |place|
+    {
+      places: places.map do |place|
       {
         name: place.name,
         latitude: place.latitude,
@@ -18,7 +19,8 @@ class PlacesController < ApplicationController
         description: place.description,
         picture: place.pictures.first
       }
-    end
+      end
+    }
   end
 
   def closest(lat, lon)
