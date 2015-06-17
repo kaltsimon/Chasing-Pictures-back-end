@@ -39,6 +39,10 @@ GEM
     arel (6.0.0)
     bcrypt (3.1.10)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -69,6 +73,11 @@ GEM
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
     orm_adapter (0.5.0)
+    paperclip (4.2.3)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
     pg (0.18.2)
     rack (1.6.1)
     rack-test (0.6.3)
@@ -130,6 +139,7 @@ DEPENDENCIES
   devise_token_auth
   geocoder
   omniauth
+  paperclip (~> 4.2)
   pg
   rails (= 4.2.1.rc4)
   rails-api
