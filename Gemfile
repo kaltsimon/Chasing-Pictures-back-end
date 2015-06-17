@@ -15,6 +15,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'paperclip', '~> 4.2'
+
 gem 'spring', group: :development
 
 gem 'rails_12factor', group: :production
