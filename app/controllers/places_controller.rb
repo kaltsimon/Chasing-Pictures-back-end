@@ -14,6 +14,7 @@ class PlacesController < ApplicationController
       places: places.map do |place|
       {
         name: place.name,
+        id: place.id,
         latitude: place.latitude,
         longitude: place.longitude,
         description: place.description,
