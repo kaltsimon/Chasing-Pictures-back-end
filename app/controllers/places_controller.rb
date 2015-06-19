@@ -10,7 +10,7 @@ class PlacesController < ApplicationController
   def show
     place = Place.includes(:pictures).find(params[:id])
 
-    render json: place_attributes(place).merge({ pictures: place.pictures })
+    render json: place_attributes(place).merge(pictures: place.pictures)
   end
 
   private
@@ -18,7 +18,7 @@ class PlacesController < ApplicationController
   def format_places(places)
     {
       places: places.map do |place|
-        place_attributes(place).merge({ picture: place.pictures.first })
+        place_attributes(place).merge(picture: place.pictures.first)
       end
     }
   end
