@@ -7,19 +7,18 @@ class PlacesController < ApplicationController
     render json: format_places(closest(params[:latitude], params[:longitude]).take(3))
   end
 
+  def show
+    place = Place.includes(:pictures).find(params[:id])
+
+    render json: place_attributes(place).merge({ pictures: place.pictures })
+  end
+
   private
 
   def format_places(places)
     {
       places: places.map do |place|
-      {
-        name: place.name,
-        id: place.id,
-        latitude: place.latitude,
-        longitude: place.longitude,
-        description: place.description,
-        picture: place.pictures.first
-      }
+        place_attributes(place).merge({ picture: place.pictures.first })
       end
     }
   end
@@ -30,5 +29,9 @@ class PlacesController < ApplicationController
       RANGE,
       units: :km
     )
+  end
+
+  def place_attributes(place)
+    place.attributes.slice(:longitude, :latitude, :name, :description, :id)
   end
 end
