@@ -10,7 +10,7 @@ class PlacesController < ApplicationController
   def show
     place = Place.includes(:pictures).find(params[:id])
 
-    render json: place.attributes.merge(pictures: place.pictures)
+    render json: place_with_pictures(place, place.pictures)
   end
 
   private
@@ -18,9 +18,20 @@ class PlacesController < ApplicationController
   def format_places(places)
     {
       places: places.map do |place|
-        place.attributes.merge(picture: place.pictures.first)
+        place_with_pictures(place, [place.pictures.first])
       end
     }
+  end
+
+  def place_with_pictures(place, pictures)
+    place.attributes.merge pictures: add_url_to_pictures(pictures)
+  end
+
+  def add_url_to_pictures(pictures)
+    pictures.map do |picture|
+      picture.url ||= URI.join(request.url, picture.file.url(:medium))
+      picture
+    end
   end
 
   def closest(lat, lon)
