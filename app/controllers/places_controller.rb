@@ -10,7 +10,11 @@ class PlacesController < ApplicationController
   def show
     place = Place.includes(:pictures).find(params[:id])
 
-    render json: place_with_pictures(place, place.pictures)
+    render json: {
+      places: [
+        place_with_pictures(place, place.pictures)
+      ]
+    }
   end
 
   private
