@@ -10,7 +10,7 @@ def commons_data(file_url)
   file_name = URI.unescape(file_url.split(/File\:|\//).last)
   digest = Digest::MD5.hexdigest(file_name)
 
-  [file_name, "http://upload.wikimedia.org/wikipedia/commons/#{digest[0]}/#{digest[0..1]}/#{file_name}"]
+  [file_name, "https://upload.wikimedia.org/wikipedia/commons/#{digest[0]}/#{digest[0..1]}/#{file_name}"]
 end
 
 doc = Nokogiri::XML(open('https://offenedaten.de/storage/f/2014-04-06T10%3A06%3A29.535Z/stadtmuseumberlin-stadtansichten.xml')).remove_namespaces!
